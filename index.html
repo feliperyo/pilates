@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autêntico Pilates Suzano - Saúde & Bem-estar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sage: #9CAF88;
+            --dark-sage: #6B7F5B;
+            --cream: #F5F1E8;
+            --beige: #E8DCC4;
+            --terracotta: #D4A373;
+            --charcoal: #2C3333;
+            --white: #FFFFFF;
+            --light-gray: #F8F8F8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.8;
+            cursor: none;
+        }
+
+        /* Cursor Elegante */
+        .cursor {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--sage);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--dark-sage);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            width: 60px;
+            height: 60px;
+            background: rgba(156, 175, 136, 0.1);
+            border-color: var(--dark-sage);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(245, 241, 232, 0.0);
+            backdrop-filter: blur(0px);
+            padding: 2rem 5%;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        header.scrolled {
+            background: rgba(245, 241, 232, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            letter-spacing: 3px;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--sage);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--dark-sage);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--beige) 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            color: var(--charcoal);
+            font-style: italic;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            color: var(--dark-sage);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            font-family: -apple-system, sans-serif;
+            animation: fadeInUp 1.2s ease-out 0.2s backwards;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 1.2rem 3.5rem;
+            background: var(--sage);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+            letter-spacing: 2px;
+            font-family: -apple-system, sans-serif;
+            animation: fadeInUp 1.2s ease-out 0.4s backwards;
+            border: 2px solid var(--sage);
+        }
+
+        .cta-primary:hover {
+            background: var(--dark-sage);
+            border-color: var(--dark-sage);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(156, 175, 136, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: var(--dark-sage);
+            letter-spacing: 2px;
+            font-family: -apple-system, sans-serif;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Seções */
+        section {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--charcoal);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--dark-sage);
+            margin-bottom: 5rem;
+            font-family: -apple-system, sans-serif;
+        }
+
+        /* Sobre o Método */
+        .about-pilates {
+            background: var(--white);
+            padding: 8rem 5%;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            color: var(--dark-sage);
+            font-style: italic;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .about-image {
+            height: 600px;
+            background: var(--beige);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .about-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image::before {
+            content: '🧘‍♀️ Foto do estúdio';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.3rem;
+            color: var(--dark-sage);
+        }
+
+        /* Benefícios */
+        .benefits {
+            background: var(--light-gray);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid rgba(156, 175, 136, 0.2);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--sage);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            color: var(--dark-sage);
+            font-style: italic;
+        }
+
+        .benefit-card p {
+            color: var(--charcoal);
+            line-height: 1.7;
+            font-family: -apple-system, sans-serif;
+        }
+
+        /* Galeria */
+        .gallery {
+            background: var(--cream);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--beige);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(0.98);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-row: span 2;
+        }
+
+        /* Instrutores */
+        .instructors {
+            background: var(--white);
+        }
+
+        .instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .instructor-card {
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .instructor-photo {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 2rem;
+            background: var(--beige);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .instructor-card:hover .instructor-photo {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(156, 175, 136, 0.3);
+        }
+
+        .instructor-photo::before {
+            content: '👤';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+        }
+
+        .instructor-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            color: var(--dark-sage);
+            font-style: italic;
+        }
+
+        .instructor-title {
+            color: var(--sage);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .instructor-bio {
+            color: var(--charcoal);
+            line-height: 1.7;
+            font-family: -apple-system, sans-serif;
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            background: var(--light-gray);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 3rem;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 6rem;
+            color: var(--sage);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            color: var(--dark-sage);
+            font-weight: 600;
+            font-family: -apple-system, sans-serif;
+        }
+
+        /* Horários */
+        .schedule {
+            background: var(--cream);
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .schedule-card {
+            background: var(--white);
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid var(--sage);
+            transition: all 0.3s;
+        }
+
+        .schedule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(156, 175, 136, 0.2);
+            background: var(--sage);
+            color: var(--white);
+        }
+
+        .schedule-day {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            color: var(--dark-sage);
+        }
+
+        .schedule-card:hover .schedule-day {
+            color: var(--white);
+        }
+
+        .schedule-time {
+            font-family: -apple-system, sans-serif;
+            line-height: 1.8;
+        }
+
+        /* CTA Final */
+        .cta-section {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--dark-sage) 100%);
+            padding: 8rem 5%;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .cta-white {
+            display: inline-block;
+            padding: 1.2rem 3.5rem;
+            background: var(--white);
+            color: var(--dark-sage);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+            letter-spacing: 2px;
+            font-family: -apple-system, sans-serif;
+            border: 2px solid var(--white);
+        }
+
+        .cta-white:hover {
+            background: transparent;
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 4rem 5%;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: var(--sage);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .footer-col p,
+        .footer-col a {
+            color: var(--cream);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s;
+            font-family: -apple-system, sans-serif;
+            opacity: 0.8;
+        }
+
+        .footer-col a:hover {
+            color: var(--sage);
+            padding-left: 5px;
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: var(--sage);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            border-radius: 50%;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .social-links a:hover {
+            background: var(--dark-sage);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(156, 175, 136, 0.2);
+            opacity: 0.7;
+            font-family: -apple-system, sans-serif;
+        }
+
+        /* WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: var(--sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 25px rgba(156, 175, 136, 0.4);
+            z-index: 999;
+            transition: all 0.3s;
+            font-size: 2rem;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.15);
+            background: var(--dark-sage);
+            box-shadow: 0 10px 40px rgba(156, 175, 136, 0.6);
+        }
+
+        /* Responsivo */
+        @media (max-width: 1024px) {
+
+            .about-grid,
+            .instructors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                cursor: default;
+            }
+
+            .cursor,
+            .cursor-dot {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Autêntico Pilates</div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#metodo">O Método</a></li>
+                <li><a href="#beneficios">Benefícios</a></li>
+                <li><a href="#instrutores">Instrutores</a></li>
+                <li><a href="#horarios">Horários</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Autêntico Pilates Suzano</h1>
+            <p class="tagline">Movimento · Equilíbrio · Bem-estar</p>
+            <a href="#contato" class="cta-primary">Agende sua Aula Experimental</a>
+        </div>
+        <div class="scroll-down">Role para descobrir ↓</div>
+    </section>
+
+    <!-- Sobre o Método -->
+    <section class="about-pilates" id="metodo">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>O Método Pilates</h2>
+                <p>Formada na rede "The Pilates Studio Brasil" por Romana Kryzanowska e Inelia Garcia desde 2000,
+                    trazemos a essência verdadeira do método criado por Joseph Pilates.</p>
+                <p>O Pilates é uma prática que une corpo e mente através de movimentos fluidos e conscientes, promovendo
+                    força, flexibilidade e equilíbrio.</p>
+                <p>Em nosso estúdio em Suzano, oferecemos aulas personalizadas com equipamentos profissionais e
+                    instrutores certificados, garantindo sua evolução com segurança e eficiência.</p>
+            </div>
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section class="benefits" id="beneficios">
+        <h2 class="section-title">Benefícios</h2>
+        <p class="section-subtitle">Transforme seu corpo e sua mente</p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">💪</div>
+                <h3>Fortalecimento</h3>
+                <p>Desenvolve músculos profundos e estabilizadores, melhorando postura e prevenindo lesões.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🧘</div>
+                <h3>Flexibilidade</h3>
+                <p>Aumenta amplitude de movimento e elasticidade muscular com segurança.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">⚖️</div>
+                <h3>Equilíbrio</h3>
+                <p>Melhora coordenação motora e consciência corporal em todas as idades.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🧠</div>
+                <h3>Concentração</h3>
+                <p>Exercícios que exigem foco e conexão mente-corpo, reduzindo estresse.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">❤️</div>
+                <h3>Qualidade de Vida</h3>
+                <p>Promove bem-estar geral, energia e vitalidade no dia a dia.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">✨</div>
+                <h3>Reabilitação</h3>
+                <p>Auxilia na recuperação de lesões e dores crônicas com supervisão profissional.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section class="gallery">
+        <h2 class="section-title">Nosso Espaço</h2>
+        <p class="section-subtitle">Um ambiente acolhedor para sua prática</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+        </div>
+    </section>
+
+    <!-- Instrutores -->
+    <section class="instructors" id="instrutores">
+        <h2 class="section-title">Instrutores</h2>
+        <p class="section-subtitle">Profissionais certificados e apaixonados</p>
+        <div class="instructors-grid">
+            <div class="instructor-card">
+                <div class="instructor-photo"></div>
+                <h3>Nome do Instrutor</h3>
+                <p class="instructor-title">Instrutor Certificado</p>
+                <p class="instructor-bio">Formação pela The Pilates Studio Brasil. Especialista em Pilates Clássico e
+                    Mat Pilates com mais de 10 anos de experiência.</p>
+            </div>
+            <div class="instructor-card">
+                <div class="instructor-photo"></div>
+                <h3>Nome da Instrutora</h3>
+                <p class="instructor-title">Instrutora Certificada</p>
+                <p class="instructor-bio">Certificada em Pilates e Fisioterapia. Focada em reabilitação e atendimento
+                    especializado para todas as idades.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="testimonials">
+        <h2 class="section-title">O que nossos alunos dizem</h2>
+        <p class="section-subtitle">Experiências transformadoras</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">O Pilates mudou minha vida! Depois de anos com dores nas costas, encontrei
+                    no Autêntico Pilates o cuidado e profissionalismo que eu precisava. Hoje me sinto mais forte e sem
+                    dores.</p>
+                <p class="testimonial-author">— Maria Fernanda S.</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">Ambiente acolhedor e instrutores extremamente preparados. As aulas são
+                    desafiadoras mas respeitam meu ritmo. Já sinto diferença na postura e disposição!</p>
+                <p class="testimonial-author">— Carlos Alberto M.</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">Melhor decisão que tomei foi começar a praticar Pilates aqui. Além dos
+                    benefícios físicos, encontrei um momento de paz e autocuidado na minha rotina.</p>
+                <p class="testimonial-author">— Ana Paula R.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horários -->
+    <section class="schedule" id="horarios">
+        <h2 class="section-title">Horários</h2>
+        <p class="section-subtitle">Encontre o melhor horário para você</p>
+        <div class="schedule-grid">
+            <div class="schedule-card">
+                <div class="schedule-day">Segunda a Sexta</div>
+                <p class="schedule-time">Manhã: 6h - 12h<br>Tarde: 14h - 20h</p>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-day">Sábado</div>
+                <p class="schedule-time">Manhã: 8h - 13h</p>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-day">Aulas</div>
+                <p class="schedule-time">Individuais<br>Duplas<br>Grupos pequenos</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-section">
+        <h2>Comece sua jornada hoje</h2>
+        <p>Agende sua aula experimental gratuita e descubra os benefícios do Pilates</p>
+        <a href="https://wa.me/5511999999999" class="cta-white" target="_blank">Agendar Aula Experimental</a>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Autêntico Pilates</h4>
+                <p>Estúdio de Pilates</p>
+                <p>Suzano - SP</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/autentico pilatessuzano" target="_blank">IG</a>
+                    <a href="#" target="_blank">FB</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>📱 (11) 99999-9999</p>
+                <p>📧 contato@autenticopilates.com.br</p>
+                <a href="#">Agendar via WhatsApp</a>
+            </div>
+            <div class="footer-col">
+                <h4>Horário</h4>
+                <p>Segunda a Sexta: 6h - 20h</p>
+                <p>Sábado: 8h - 13h</p>
+                <p>Domingo: Fechado</p>
+            </div>
+            <div class="footer-col">
+                <h4>Links</h4>
+                <a href="#home">Início</a>
+                <a href="#metodo">O Método</a>
+                <a href="#beneficios">Benefícios</a>
+                <a href="#instrutores">Instrutores</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Autêntico Pilates Suzano - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/5511999999999" class="whatsapp-float" target="_blank">💬</a>
+
+    <script>
+        // Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Hover
+        const hoverElements = document.querySelectorAll('a, .benefit-card, .gallery-item, .instructor-card, .testimonial-card, .schedule-card');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Header Scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 1s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
